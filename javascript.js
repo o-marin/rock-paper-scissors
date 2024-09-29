@@ -1,6 +1,5 @@
 let choices = ["ROCK", "PAPER", "SCISSORS"];
 
-console.log("Computer Turn");
 //step 2: computer choice logic
 function getComputerChoice() {
   return choices[Math.floor(Math.random() * choices.length)];
@@ -8,19 +7,8 @@ function getComputerChoice() {
 
 //step 3: human choice logic.
 
-console.log("Human turn");
-function getHumanChoice() {
-  let human_choice = prompt("Please choose Rock, Paper or Scissors");
-  human_choice = human_choice.toUpperCase();
-  while (!choices.includes(human_choice)) {
-    human_choice = prompt(
-      "Please choose a valid option(Rock, Paper or Scissors)"
-    );
-    human_choice = human_choice.toUpperCase();
-  }
 
-  return human_choice;
-}
+
 
 //step 4: keeping scores
 
@@ -54,9 +42,34 @@ function playRound(computerChoice, humanChoice) {
   }
 }
 
-// I used 5 rounds for testing
 
-for (let i = 0; i < 5; i++) {
-  console.log(playRound(getComputerChoice(), getHumanChoice()));
-  console.log(`the score is: human: ${humanScore} computer: ${computerScore}`);
-}
+
+
+
+/**
+   * 
+   * tengo que agregar un listener que capture el textContent del boton, entonces un addEventListener,
+   * que guarde en una variable el textContent del boton que se presiona
+   * realiza una version prelimimnar sin for sino en singular a cada boton.
+   * 
+   * debo agregar a los botones un listener que ejecute playRound cuando apreto un boton y ahi capture el
+   * textContent como playerChoice o humanChoice
+   */
+
+
+
+let botones = document.querySelectorAll('#buttons button')
+console.log(buttons)
+
+
+  let rock = document.querySelector('#rock');
+  let paper = document.querySelector('#paper')
+  let scissors = document.querySelector('#scissors')
+
+  let human_choice = '' 
+  // Como guardo dentro de cada boton el event listener
+  botones.forEach(boton=>boton.addEventListener('click', (e)=>{
+    human_choice = boton.textContent
+
+    playRound(getComputerChoice(), human_choice.toUpperCase())
+  }));
